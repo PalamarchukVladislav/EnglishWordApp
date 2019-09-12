@@ -1,7 +1,7 @@
-package com.luv2code.springboot.cruddemo.service;
+package org.englishapp.programm.service;
 
-import com.luv2code.springboot.cruddemo.entity.Category;
-import com.luv2code.springboot.cruddemo.repository.CategoryRepository;
+import org.englishapp.programm.entity.Category;
+import org.englishapp.programm.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,12 +11,13 @@ import java.util.Optional;
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
-    private CategoryRepository categoryRepository;
+    final CategoryRepository categoryRepository;
 
     @Autowired
-    public CategoryServiceImpl(CategoryRepository categoryRepository){
+    CategoryServiceImpl(CategoryRepository categoryRepository){
         this.categoryRepository = categoryRepository;
     }
+
 
     @Override
     public List<Category> findAll() {
@@ -25,7 +26,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category findById(int categoriesId) {
+    public Category findById(long categoriesId) {
         Optional<Category> result = categoryRepository.findById(categoriesId);
 
         Category category = null;
@@ -47,7 +48,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public void deleteById(int categoriesId) {
+    public void deleteById(long categoriesId) {
         categoryRepository.deleteById(categoriesId);
     }
 }

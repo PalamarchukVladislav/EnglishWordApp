@@ -1,7 +1,7 @@
-package com.luv2code.springboot.cruddemo.controller;
+package org.englishapp.programm.controller;
 
-import com.luv2code.springboot.cruddemo.entity.Category;
-import com.luv2code.springboot.cruddemo.service.CategoryService;
+import org.englishapp.programm.entity.Category;
+import org.englishapp.programm.service.CategoryService;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,9 +11,9 @@ import java.util.List;
 @RequestMapping("/category")
 public class CategoryController {
 
-    private CategoryService categoryService;
+    final CategoryService categoryService;
 
-    public CategoryController(CategoryService categoryService){
+    CategoryController(CategoryService categoryService){
         this.categoryService = categoryService;
     }
 
@@ -31,7 +31,7 @@ public class CategoryController {
     }
 
     @GetMapping("/list/{categoriesId}")
-    public Category getCategory(@PathVariable int categoriesId){
+    public Category getCategory(@PathVariable long categoriesId){
 
         Category category = categoryService.findById(categoriesId);
 
@@ -60,7 +60,7 @@ public class CategoryController {
     }
 
     @DeleteMapping("/list/{categoriesId}")
-    public String deleteCategory(@PathVariable int categoriesId){
+    public String deleteCategory(@PathVariable long categoriesId){
 
         Category category = categoryService.findById(categoriesId);
 

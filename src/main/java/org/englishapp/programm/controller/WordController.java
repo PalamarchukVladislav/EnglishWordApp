@@ -1,7 +1,8 @@
-package com.luv2code.springboot.cruddemo.controller;
+package org.englishapp.programm.controller;
 
-import com.luv2code.springboot.cruddemo.entity.Word;
-import com.luv2code.springboot.cruddemo.service.WordService;
+import org.englishapp.programm.entity.Category;
+import org.englishapp.programm.entity.Word;
+import org.englishapp.programm.service.WordService;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,9 +13,12 @@ import java.util.List;
 @RequestMapping("/word")
 public class WordController {
 
+    private Category category;
+
+
     private WordService wordService;
 
-    public WordController(WordService wordService){
+    WordController(WordService wordService){
         this.wordService = wordService;
     }
 
@@ -32,7 +36,7 @@ public class WordController {
     }
 
     @GetMapping("/list/{wordId}")
-    public Word getWord(@PathVariable int wordId){
+    public Word getWord(@PathVariable long wordId){
 
         Word word = wordService.findById(wordId);
 
@@ -46,8 +50,9 @@ public class WordController {
     @PostMapping("/list")
     public Word addWord(@RequestBody Word word){
 
-
         wordService.save(word);
+
+        category.addWord(word);
 
         return word;
     }
@@ -61,7 +66,7 @@ public class WordController {
     }
 
     @DeleteMapping("/list/{wordId}")
-    public String deleteWord(@PathVariable int wordId){
+    public String deleteWord(@PathVariable long wordId){
 
         Word word = wordService.findById(wordId);
 

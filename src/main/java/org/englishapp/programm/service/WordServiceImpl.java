@@ -1,7 +1,7 @@
-package com.luv2code.springboot.cruddemo.service;
+package org.englishapp.programm.service;
 
-import com.luv2code.springboot.cruddemo.entity.Word;
-import com.luv2code.springboot.cruddemo.repository.WordRepository;
+import org.englishapp.programm.entity.Word;
+import org.englishapp.programm.repository.WordRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,7 +12,7 @@ public class WordServiceImpl implements WordService {
 
     private WordRepository wordRepository;
 
-    public WordServiceImpl(WordRepository wordRepository){
+    WordServiceImpl(WordRepository wordRepository){
         this.wordRepository = wordRepository;
     }
 
@@ -23,7 +23,7 @@ public class WordServiceImpl implements WordService {
     }
 
     @Override
-    public Word findById(int wordId) {
+    public Word findById(long wordId) {
 
         Optional<Word> result = wordRepository.findById(wordId);
 
@@ -44,7 +44,7 @@ public class WordServiceImpl implements WordService {
     }
 
     @Override
-    public void deleteById(int wordId) {
+    public void deleteById(long wordId) {
         wordRepository.deleteById(wordId);
     }
 }
