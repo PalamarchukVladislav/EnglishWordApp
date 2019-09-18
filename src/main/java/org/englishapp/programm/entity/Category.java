@@ -23,20 +23,17 @@ public class Category {
 	@Column(name="category_name")
 	private String categoryName;
 
-	@OneToMany(mappedBy = "category",
-			cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
-	private List<Word> words;
+	@OneToMany(mappedBy = "category")
+	private List<Word> words = new ArrayList<>();
 
-	public void addWord(Word word){
 
-		if (words == null){
-			words = new ArrayList<>();
-		}
+	public void addWord(final Word word){
 
 		words.add(word);
 
 		word.setCategory(this);
 	}
+
 }
 
 

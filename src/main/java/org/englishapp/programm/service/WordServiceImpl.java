@@ -1,5 +1,6 @@
 package org.englishapp.programm.service;
 
+import org.englishapp.programm.entity.Category;
 import org.englishapp.programm.entity.Word;
 import org.englishapp.programm.repository.WordRepository;
 import org.springframework.stereotype.Service;
@@ -47,4 +48,5 @@ public class WordServiceImpl implements WordService {
     public void deleteById(long wordId) {
         wordRepository.deleteById(wordId);
     }
+
 }

@@ -51,4 +51,5 @@ public class CategoryServiceImpl implements CategoryService {
     public void deleteById(long categoriesId) {
         categoryRepository.deleteById(categoriesId);
     }
+
 }

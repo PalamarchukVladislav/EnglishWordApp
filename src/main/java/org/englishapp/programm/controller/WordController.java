@@ -13,9 +13,6 @@ import java.util.List;
 @RequestMapping("/word")
 public class WordController {
 
-    private Category category;
-
-
     private WordService wordService;
 
     WordController(WordService wordService){
@@ -51,8 +48,6 @@ public class WordController {
     public Word addWord(@RequestBody Word word){
 
         wordService.save(word);
-
-        category.addWord(word);
 
         return word;
     }

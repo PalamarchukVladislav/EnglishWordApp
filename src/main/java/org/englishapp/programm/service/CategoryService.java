@@ -1,6 +1,7 @@
 package org.englishapp.programm.service;
 
 import org.englishapp.programm.entity.Category;
+import org.englishapp.programm.entity.Word;
 
 import java.util.List;
 
@@ -13,4 +14,5 @@ public interface CategoryService {
     void save(Category theCategory);
 
     void deleteById(long theId);
+
 }

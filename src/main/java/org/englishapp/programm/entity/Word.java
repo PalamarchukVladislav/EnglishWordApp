@@ -24,7 +24,7 @@ public class Word {
 	@Column(name="ukr_translate")
 	private String ukrTranslate;
 
-	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+	@ManyToOne
 	@JoinColumn(name = "category_id")
 	private Category category;
 }
