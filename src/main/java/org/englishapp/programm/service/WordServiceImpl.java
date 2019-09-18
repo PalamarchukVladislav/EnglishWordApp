@@ -1,7 +1,8 @@
 package org.englishapp.programm.service;
 
-import org.englishapp.programm.entity.Category;
-import org.englishapp.programm.entity.Word;
+import org.englishapp.programm.model.entity.Category;
+import org.englishapp.programm.model.entity.Word;
+import org.englishapp.programm.model.entity.request.WordRequest;
 import org.englishapp.programm.repository.WordRepository;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +12,12 @@ import java.util.Optional;
 @Service
 public class WordServiceImpl implements WordService {
 
-    private WordRepository wordRepository;
+    private final WordRepository wordRepository;
+    private final CategoryService categoryService;
 
-    WordServiceImpl(WordRepository wordRepository){
+    WordServiceImpl(WordRepository wordRepository, CategoryService categoryService){
         this.wordRepository = wordRepository;
+        this.categoryService = categoryService;
     }
 
 
@@ -40,13 +43,23 @@ public class WordServiceImpl implements WordService {
     }
 
     @Override
-    public void save(Word word) {
+    public void save(WordRequest wordRequest) {
+        Word word = createWordFromWordRequest(wordRequest);
+        Category category = categoryService.findById(wordRequest.getCategoryId());
+        category.addWord(word);
         wordRepository.save(word);
     }
 
     @Override
     public void deleteById(long wordId) {
         wordRepository.deleteById(wordId);
+    }
+
+    private Word createWordFromWordRequest(WordRequest wordRequest){
+        Word word = new Word();
+        word.setUkrTranslate(wordRequest.getUkrTranslate());
+        word.setEngTranslate(wordRequest.getEngTranslate());
+        return word;
     }
 
 }

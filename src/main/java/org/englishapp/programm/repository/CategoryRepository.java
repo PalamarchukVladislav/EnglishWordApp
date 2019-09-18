@@ -1,6 +1,6 @@
 package org.englishapp.programm.repository;
 
-import org.englishapp.programm.entity.Category;
+import org.englishapp.programm.model.entity.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 

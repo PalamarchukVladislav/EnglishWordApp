@@ -1,4 +1,4 @@
-package org.englishapp.programm.entity;
+package org.englishapp.programm.model.entity;
 
 import lombok.*;
 

@@ -1,7 +1,6 @@
 package org.englishapp.programm.service;
 
-import org.englishapp.programm.entity.Category;
-import org.englishapp.programm.entity.Word;
+import org.englishapp.programm.model.entity.Category;
 
 import java.util.List;
 

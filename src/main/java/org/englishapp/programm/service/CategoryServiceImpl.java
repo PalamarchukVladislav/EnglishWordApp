@@ -1,6 +1,6 @@
 package org.englishapp.programm.service;
 
-import org.englishapp.programm.entity.Category;
+import org.englishapp.programm.model.entity.Category;
 import org.englishapp.programm.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

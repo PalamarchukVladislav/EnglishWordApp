@@ -1,9 +1,8 @@
 package org.englishapp.programm.controller;
 
-import org.englishapp.programm.entity.Category;
-import org.englishapp.programm.entity.Word;
+import org.englishapp.programm.model.entity.Word;
+import org.englishapp.programm.model.entity.request.WordRequest;
 import org.englishapp.programm.service.WordService;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,14 +19,7 @@ public class WordController {
     }
 
     @GetMapping("/list")
-    public List<Word> findAll(Model model){
-
-        // get employees from db
-        List<Word> categories = wordService.findAll();
-
-        // add to the spring model
-        model.addAttribute("word", categories);
-
+    public List<Word> findAll(){
 
         return wordService.findAll();
     }
@@ -45,19 +37,19 @@ public class WordController {
     }
 
     @PostMapping("/list")
-    public Word addWord(@RequestBody Word word){
+    public WordRequest addWord(@RequestBody WordRequest wordRequest){
 
-        wordService.save(word);
+        wordService.save(wordRequest);
 
-        return word;
+        return wordRequest;
     }
 
     @PutMapping("/list")
-    public Word updateWord(@RequestBody Word word){
+    public WordRequest updateWord(@RequestBody WordRequest wordRequest){
 
-        wordService.save(word);
+        wordService.save(wordRequest);
 
-        return word;
+        return wordRequest;
     }
 
     @DeleteMapping("/list/{wordId}")

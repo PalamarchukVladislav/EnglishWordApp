@@ -1,7 +1,6 @@
 package org.englishapp.programm.controller;
 
-import org.englishapp.programm.entity.Category;
-import org.englishapp.programm.entity.Word;
+import org.englishapp.programm.model.entity.Category;
 import org.englishapp.programm.service.CategoryService;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
