@@ -28,7 +28,7 @@ public class WordController {
     @GetMapping("/list/{wordId}")
     public Word getWord(@PathVariable long wordId){ // @PathVariable - send parameter's request
 
-        Word word = wordService.findById(wordId); //
+        Word word = wordService.findById(wordId);
 
         if (word == null){
             throw new RuntimeException("Word id not found - " + wordId);
@@ -38,17 +38,17 @@ public class WordController {
     }
 
     @PostMapping("/list")
-    public Word addWord(@RequestBody Word word){
+    public WordResponse addWord(@RequestBody WordRequest wordRequest){
 
-        wordService.save(word);
+        wordService.save(wordRequest);
 
-        return word;
+        return wordService.save(wordRequest);
     }
 
     @PutMapping("/list")
     public Word updateWord(@RequestBody Word word){
 
-        wordService.save(word);
+//        wordService.save(word);
 
         return word;
     }

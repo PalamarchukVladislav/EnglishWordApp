@@ -28,7 +28,7 @@ public class WordServiceImpl implements WordService {
     }
 
     @Override
-    public WordResponse findById(long wordId) {
+    public Word findById(long wordId) {
 
         Optional<Word> wordOptional = wordRepository.findById(wordId);
 
@@ -40,16 +40,19 @@ public class WordServiceImpl implements WordService {
             throw new RuntimeException("Word with " + wordId + " id, not found" );
         }
 
-        return wordToWordResponse(word);
+        return word;
     }
 
     @Override
-    public void save(WordRequest wordRequest) {
+    public WordResponse save(WordRequest wordRequest) {
         Word word = createWordFromWordRequest(wordRequest);
         Category category = categoryService.findById(wordRequest.getCategoryId());
         category.addWord(word);
         wordRepository.save(word);
+
+        return wordToWordResponse(word);
     }
+
 
     @Override
     public void deleteById(long wordId) {

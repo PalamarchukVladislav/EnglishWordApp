@@ -8,12 +8,12 @@ import java.util.List;
 
 public interface WordService  {
 
-    public List<WordResponse> findAll();
+    public List<Word> findAll();
 
-    public WordResponse findById(long wordId);
+    public Word findById(long wordId);
 
-    public void save(WordRequest wordRequest);
+    public WordResponse save(WordRequest wordRequest);
+
 
     public void deleteById(long wordId);
-
 }
