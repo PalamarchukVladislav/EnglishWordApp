@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface WordService  {
 
-    public List<Word> findAll();
+    public List<WordResponse> findAll(WordRequest wordRequest);
 
     public WordResponse findById(long wordId);
 

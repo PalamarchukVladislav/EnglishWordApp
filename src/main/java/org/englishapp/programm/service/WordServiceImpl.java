@@ -7,6 +7,7 @@ import org.englishapp.programm.model.entity.response.WordResponse;
 import org.englishapp.programm.repository.WordRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,8 +24,27 @@ public class WordServiceImpl implements WordService {
 
 
     @Override
-    public List<Word> findAll() {
-        return wordRepository.findAll();
+    public List<WordResponse> findAll(WordRequest wordRequest) {
+        WordResponse wordResponse;
+
+        List<Word> words = wordRepository.findAll();
+        List<WordResponse> wordResponses = new LinkedList<>();
+
+        if (words != null){
+
+            for (int i = 0; i < words.size(); i++) {
+                wordResponse = wordToWordResponse(words.get(i));
+                wordResponses.add(i,wordResponse);
+            }
+
+        }else {
+            throw new RuntimeException("We not have ony words" );
+        }
+
+
+
+
+        return wordResponses;
     }
 
     @Override

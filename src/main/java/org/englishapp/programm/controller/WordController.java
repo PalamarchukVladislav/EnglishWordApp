@@ -21,8 +21,8 @@ public class WordController {
     } // Dependency injection
 
     @GetMapping("/list")
-    public List<Word> findAll(){
-        return wordService.findAll();
+    public List<WordResponse> findAll(WordRequest wordRequest){
+        return wordService.findAll(wordRequest);
     } // send request to wordService to find all word.
 
     @GetMapping("/list/{wordId}")
