@@ -11,22 +11,14 @@ import java.util.List;
 @RequestMapping("/category")
 public class CategoryController {
 
-    final CategoryService categoryService;
+    private final CategoryService categoryService;
 
     CategoryController(CategoryService categoryService){
         this.categoryService = categoryService;
-    }
+    } // Dependency injection
 
     @GetMapping("/list")
-    public List<Category> findAll(Model model){
-
-        // get employees from db
-        List<Category> categories = categoryService.findAll();
-
-        // add to the spring model
-        model.addAttribute("category", categories);
-
-
+    public List<Category> findAll(){
         return categoryService.findAll();
     }
 

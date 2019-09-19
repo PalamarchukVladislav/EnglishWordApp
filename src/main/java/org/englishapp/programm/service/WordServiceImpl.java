@@ -3,6 +3,7 @@ package org.englishapp.programm.service;
 import org.englishapp.programm.model.entity.Category;
 import org.englishapp.programm.model.entity.Word;
 import org.englishapp.programm.model.entity.request.WordRequest;
+import org.englishapp.programm.model.entity.response.WordResponse;
 import org.englishapp.programm.repository.WordRepository;
 import org.springframework.stereotype.Service;
 
@@ -27,19 +28,19 @@ public class WordServiceImpl implements WordService {
     }
 
     @Override
-    public Word findById(long wordId) {
+    public WordResponse findById(long wordId) {
 
-        Optional<Word> result = wordRepository.findById(wordId);
+        Optional<Word> wordOptional = wordRepository.findById(wordId);
 
-        Word word = null;
+        Word word;
 
-        if (result.isPresent()){
-            word = result.get();
+        if (wordOptional.isPresent()){
+            word = wordOptional.get();
         }else {
-            throw new RuntimeException("Did not find category id - " + wordId );
+            throw new RuntimeException("Word with " + wordId + " id, not found" );
         }
 
-        return word;
+        return wordToWordResponse(word);
     }
 
     @Override
@@ -60,6 +61,14 @@ public class WordServiceImpl implements WordService {
         word.setUkrTranslate(wordRequest.getUkrTranslate());
         word.setEngTranslate(wordRequest.getEngTranslate());
         return word;
+    }
+
+    private WordResponse wordToWordResponse(Word word){
+        WordResponse wordResponse = new WordResponse();
+        wordResponse.setEngTranslate(word.getEngTranslate());
+        wordResponse.setUkrTranslate(word.getUkrTranslate());
+
+        return wordResponse;
     }
 
 }

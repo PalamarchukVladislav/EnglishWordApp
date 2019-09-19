@@ -2,6 +2,7 @@ package org.englishapp.programm.controller;
 
 import org.englishapp.programm.model.entity.Word;
 import org.englishapp.programm.model.entity.request.WordRequest;
+import org.englishapp.programm.model.entity.response.WordResponse;
 import org.englishapp.programm.service.WordService;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,20 +15,20 @@ public class WordController {
 
     private WordService wordService;
 
+
     WordController(WordService wordService){
         this.wordService = wordService;
-    }
+    } // Dependency injection
 
     @GetMapping("/list")
     public List<Word> findAll(){
-
         return wordService.findAll();
-    }
+    } // send request to wordService to find all word.
 
     @GetMapping("/list/{wordId}")
-    public Word getWord(@PathVariable long wordId){
+    public Word getWord(@PathVariable long wordId){ // @PathVariable - send parameter's request
 
-        Word word = wordService.findById(wordId);
+        Word word = wordService.findById(wordId); //
 
         if (word == null){
             throw new RuntimeException("Word id not found - " + wordId);
@@ -37,19 +38,19 @@ public class WordController {
     }
 
     @PostMapping("/list")
-    public WordRequest addWord(@RequestBody WordRequest wordRequest){
+    public Word addWord(@RequestBody Word word){
 
-        wordService.save(wordRequest);
+        wordService.save(word);
 
-        return wordRequest;
+        return word;
     }
 
     @PutMapping("/list")
-    public WordRequest updateWord(@RequestBody WordRequest wordRequest){
+    public Word updateWord(@RequestBody Word word){
 
-        wordService.save(wordRequest);
+        wordService.save(word);
 
-        return wordRequest;
+        return word;
     }
 
     @DeleteMapping("/list/{wordId}")
