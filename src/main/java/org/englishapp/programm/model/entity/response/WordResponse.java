@@ -10,4 +10,6 @@ public class WordResponse {
     private String ukrTranslate;
 
     private Long categoryId;
+
+
 }

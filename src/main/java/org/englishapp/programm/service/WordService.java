@@ -8,11 +8,11 @@ import java.util.List;
 
 public interface WordService  {
 
-    public List<WordResponse> findAll(WordRequest wordRequest);
+     List<WordResponse> findAll(WordRequest wordRequest);
 
-    public WordResponse findById(long wordId);
+     WordResponse findById(long wordId);
 
-    public WordResponse save(WordRequest wordRequest);
+     WordResponse save(WordRequest wordRequest);
 
-    public void deleteById(long wordId);
+     void deleteById(long wordId);
 }

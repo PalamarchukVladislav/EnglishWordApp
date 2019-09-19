@@ -3,6 +3,7 @@ package org.englishapp.programm.service;
 import org.englishapp.programm.model.entity.Category;
 import org.englishapp.programm.model.entity.Word;
 import org.englishapp.programm.model.entity.request.WordRequest;
+import org.englishapp.programm.model.entity.response.CategoryResponse;
 import org.englishapp.programm.model.entity.response.WordResponse;
 import org.englishapp.programm.repository.WordRepository;
 import org.springframework.stereotype.Service;
@@ -37,12 +38,9 @@ public class WordServiceImpl implements WordService {
                 wordResponses.add(i,wordResponse);
             }
 
-        }else {
+        } else {
             throw new RuntimeException("We not have ony words" );
         }
-
-
-
 
         return wordResponses;
     }
@@ -66,8 +64,8 @@ public class WordServiceImpl implements WordService {
     @Override
     public WordResponse save(WordRequest wordRequest) {
         Word word = createWordFromWordRequest(wordRequest);
-        Category category = categoryService.findById(wordRequest.getCategoryId());
-        category.addWord(word);
+        CategoryResponse categoryResponse = categoryService.findById(wordRequest.getCategoryId());
+        categoryResponse.addWord(word);
         wordRepository.save(word);
 
         return wordToWordResponse(word);

@@ -24,7 +24,7 @@ public class Word {
 	@Column(name="ukr_translate")
 	private String ukrTranslate;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "category_id")
 	private Category category;
 }

@@ -1,8 +1,8 @@
 package org.englishapp.programm.controller;
 
-import org.englishapp.programm.model.entity.Category;
+import org.englishapp.programm.model.entity.request.CategoryRequest;
+import org.englishapp.programm.model.entity.response.CategoryResponse;
 import org.englishapp.programm.service.CategoryService;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,44 +18,44 @@ public class CategoryController {
     } // Dependency injection
 
     @GetMapping("/list")
-    public List<Category> findAll(){
-        return categoryService.findAll();
+    public List<CategoryResponse> findAll(CategoryRequest categoryRequest){
+        return categoryService.findAll(categoryRequest);
     }
 
     @GetMapping("/list/{categoriesId}")
-    public Category getCategory(@PathVariable long categoriesId){
+    public CategoryResponse getCategory(@PathVariable long categoriesId){
 
-        Category category = categoryService.findById(categoriesId);
+        CategoryResponse categoryResponse = categoryService.findById(categoriesId);
 
-        if (category == null){
+        if (categoryResponse == null){
             throw new RuntimeException("Category id not found - " + categoriesId);
         }
 
-        return category;
+        return categoryResponse;
     }
 
     @PostMapping("/list")
-    public Category addCategory(@RequestBody Category category){
+    public CategoryResponse addCategory(@RequestBody CategoryRequest categoryRequest){
 
-        categoryService.save(category);
+        categoryService.save(categoryRequest);
 
-        return category;
+        return categoryService.save(categoryRequest);
     }
 
     @PutMapping("/list")
-    public Category updateCategory(@RequestBody Category category){
+    public CategoryResponse updateCategory(@RequestBody CategoryRequest categoryRequest){
 
-        categoryService.save(category);
+        categoryService.save(categoryRequest);
 
-        return category;
+        return categoryService.save(categoryRequest);
     }
 
     @DeleteMapping("/list/{categoriesId}")
     public String deleteCategory(@PathVariable long categoriesId){
 
-        Category category = categoryService.findById(categoriesId);
+        CategoryResponse categoryResponse = categoryService.findById(categoriesId);
 
-        if (category == null){
+        if (categoryResponse == null){
             throw new RuntimeException("Category id not found - " + categoriesId);
         }
 
