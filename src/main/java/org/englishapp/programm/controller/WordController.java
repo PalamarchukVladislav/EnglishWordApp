@@ -26,15 +26,15 @@ public class WordController {
     } // send request to wordService to find all word.
 
     @GetMapping("/list/{wordId}")
-    public Word getWord(@PathVariable long wordId){ // @PathVariable - send parameter's request
+    public WordResponse getWord(@PathVariable long wordId){ // @PathVariable - send parameter's request
 
-        Word word = wordService.findById(wordId);
+        WordResponse wordResponse = wordService.findById(wordId);
 
-        if (word == null){
+        if (wordResponse == null){
             throw new RuntimeException("Word id not found - " + wordId);
         }
 
-        return word;
+        return wordResponse;
     }
 
     @PostMapping("/list")
@@ -56,9 +56,9 @@ public class WordController {
     @DeleteMapping("/list/{wordId}")
     public String deleteWord(@PathVariable long wordId){
 
-        Word word = wordService.findById(wordId);
+        WordResponse wordResponse = wordService.findById(wordId);
 
-        if (word == null){
+        if (wordResponse == null){
             throw new RuntimeException("Category id not found - " + wordId);
         }
 

@@ -10,7 +10,7 @@ public interface WordService  {
 
     public List<Word> findAll();
 
-    public Word findById(long wordId);
+    public WordResponse findById(long wordId);
 
     public WordResponse save(WordRequest wordRequest);
 

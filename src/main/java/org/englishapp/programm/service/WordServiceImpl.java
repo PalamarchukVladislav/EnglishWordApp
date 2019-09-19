@@ -28,7 +28,7 @@ public class WordServiceImpl implements WordService {
     }
 
     @Override
-    public Word findById(long wordId) {
+    public WordResponse findById(long wordId) {
 
         Optional<Word> wordOptional = wordRepository.findById(wordId);
 
@@ -40,7 +40,7 @@ public class WordServiceImpl implements WordService {
             throw new RuntimeException("Word with " + wordId + " id, not found" );
         }
 
-        return word;
+        return wordToWordResponse(word);
     }
 
     @Override
