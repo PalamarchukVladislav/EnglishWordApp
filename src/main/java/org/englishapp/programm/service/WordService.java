@@ -14,6 +14,5 @@ public interface WordService  {
 
     public WordResponse save(WordRequest wordRequest);
 
-
     public void deleteById(long wordId);
 }

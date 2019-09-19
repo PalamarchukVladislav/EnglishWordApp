@@ -46,11 +46,11 @@ public class WordController {
     }
 
     @PutMapping("/list")
-    public Word updateWord(@RequestBody Word word){
+    public WordResponse updateWord(@RequestBody WordRequest wordRequest){
 
-//        wordService.save(word);
+        wordService.save(wordRequest);
 
-        return word;
+        return wordService.save(wordRequest);
     }
 
     @DeleteMapping("/list/{wordId}")
