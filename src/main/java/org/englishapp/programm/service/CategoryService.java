@@ -10,7 +10,7 @@ public interface CategoryService {
 
     Category findById(long theId);
 
-    void save(Category theCategory);
+    void save(Category category);
 
     void deleteById(long theId);
 

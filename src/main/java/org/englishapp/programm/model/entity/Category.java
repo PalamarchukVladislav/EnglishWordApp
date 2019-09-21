@@ -1,5 +1,6 @@
 package org.englishapp.programm.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -16,7 +17,7 @@ import java.util.List;
 public class Category {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
 	private long id;
 	
@@ -24,6 +25,7 @@ public class Category {
 	private String categoryName;
 
 	@OneToMany(mappedBy = "category")
+	@JsonManagedReference
 	private List<Word> words = new ArrayList<>();
 
 

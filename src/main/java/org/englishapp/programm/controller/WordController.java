@@ -1,8 +1,6 @@
 package org.englishapp.programm.controller;
 
 import org.englishapp.programm.model.entity.Word;
-import org.englishapp.programm.model.entity.request.WordRequest;
-import org.englishapp.programm.model.entity.response.WordResponse;
 import org.englishapp.programm.service.WordService;
 import org.springframework.web.bind.annotation.*;
 

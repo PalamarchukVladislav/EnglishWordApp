@@ -2,8 +2,6 @@ package org.englishapp.programm.service;
 
 import org.englishapp.programm.model.entity.Category;
 import org.englishapp.programm.model.entity.Word;
-import org.englishapp.programm.model.entity.request.WordRequest;
-import org.englishapp.programm.model.entity.response.WordResponse;
 import org.englishapp.programm.repository.WordRepository;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +26,7 @@ public class WordServiceImpl implements WordService {
     }
 
     @Override
-    public WordResponse findById(long wordId) {
+    public Word findById(long wordId) {
 
         Optional<Word> wordOptional = wordRepository.findById(wordId);
 
@@ -40,14 +38,11 @@ public class WordServiceImpl implements WordService {
             throw new RuntimeException("Word with " + wordId + " id, not found" );
         }
 
-        return wordToWordResponse(word);
+        return word;
     }
 
     @Override
-    public void save(WordRequest wordRequest) {
-        Word word = createWordFromWordRequest(wordRequest);
-        Category category = categoryService.findById(wordRequest.getCategoryId());
-        category.addWord(word);
+    public void save(Word word) {
         wordRepository.save(word);
     }
 
@@ -56,19 +51,5 @@ public class WordServiceImpl implements WordService {
         wordRepository.deleteById(wordId);
     }
 
-    private Word createWordFromWordRequest(WordRequest wordRequest){
-        Word word = new Word();
-        word.setUkrTranslate(wordRequest.getUkrTranslate());
-        word.setEngTranslate(wordRequest.getEngTranslate());
-        return word;
-    }
-
-    private WordResponse wordToWordResponse(Word word){
-        WordResponse wordResponse = new WordResponse();
-        wordResponse.setEngTranslate(word.getEngTranslate());
-        wordResponse.setUkrTranslate(word.getUkrTranslate());
-
-        return wordResponse;
-    }
 
 }

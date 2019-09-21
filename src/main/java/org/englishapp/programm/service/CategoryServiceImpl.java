@@ -11,7 +11,7 @@ import java.util.Optional;
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
-    final CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
 
     @Autowired
     CategoryServiceImpl(CategoryRepository categoryRepository){
@@ -29,7 +29,7 @@ public class CategoryServiceImpl implements CategoryService {
     public Category findById(long categoriesId) {
         Optional<Category> result = categoryRepository.findById(categoriesId);
 
-        Category category = null;
+        Category category;
 
         if (result.isPresent()){
             category = result.get();
@@ -42,7 +42,6 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void save(Category category) {
-
         categoryRepository.save(category);
 
     }
