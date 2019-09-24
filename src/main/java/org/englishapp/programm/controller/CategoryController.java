@@ -1,10 +1,12 @@
 package org.englishapp.programm.controller;
 
-import org.englishapp.programm.model.entity.request.CategoryRequest;
-import org.englishapp.programm.model.entity.response.CategoryResponse;
+import org.englishapp.programm.model.entity.Category;
 import org.englishapp.programm.service.CategoryService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -15,53 +17,62 @@ public class CategoryController {
 
     CategoryController(CategoryService categoryService){
         this.categoryService = categoryService;
-    } // Dependency injection
+    }
 
     @GetMapping("/list")
-    public List<CategoryResponse> findAll(CategoryRequest categoryRequest){
-        return categoryService.findAll(categoryRequest);
+    public ResponseEntity<List<Category>> findAll(){
+
+        List<Category> categories = categoryService.findAll();
+
+        if (categories.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        else {
+            List<Category> categoriesAfterCheck = new ArrayList<>(categories);
+
+            return new ResponseEntity<>(categoriesAfterCheck, HttpStatus.FOUND);
+        }
     }
 
     @GetMapping("/list/{categoriesId}")
-    public CategoryResponse getCategory(@PathVariable long categoriesId){
+    public ResponseEntity<Category> getCategory(@PathVariable long categoriesId){
 
-        CategoryResponse categoryResponse = categoryService.findById(categoriesId);
+        Category category = categoryService.findById(categoriesId);
 
-        if (categoryResponse == null){
+        if (category == null){
             throw new RuntimeException("Category id not found - " + categoriesId);
         }
 
-        return categoryResponse;
+        return new ResponseEntity<>(category, HttpStatus.FOUND);
     }
 
     @PostMapping("/list")
-    public CategoryResponse addCategory(@RequestBody CategoryRequest categoryRequest){
+    public ResponseEntity<Category> addCategory(@RequestBody Category category){
 
-        categoryService.save(categoryRequest);
+        categoryService.save(category);
 
-        return categoryService.save(categoryRequest);
+        return new ResponseEntity<>(category, HttpStatus.CREATED);
     }
 
     @PutMapping("/list")
-    public CategoryResponse updateCategory(@RequestBody CategoryRequest categoryRequest){
+    public ResponseEntity<Category> updateCategory(@RequestBody Category category){
 
-        categoryService.save(categoryRequest);
+        categoryService.save(category);
 
-        return categoryService.save(categoryRequest);
+        return new ResponseEntity<>(category, HttpStatus.OK);
     }
 
     @DeleteMapping("/list/{categoriesId}")
-    public String deleteCategory(@PathVariable long categoriesId){
+    public ResponseEntity<String> deleteCategory(@PathVariable long categoriesId){
 
-        CategoryResponse categoryResponse = categoryService.findById(categoriesId);
+        Category category = categoryService.findById(categoriesId);
 
-        if (categoryResponse == null){
+        if (category == null){
             throw new RuntimeException("Category id not found - " + categoriesId);
         }
 
         categoryService.deleteById(categoriesId);
 
-        return "Deleted category id - " + categoriesId;
+        return new ResponseEntity<>("Deleted category id " + categoriesId, HttpStatus.OK);
     }
-
 }

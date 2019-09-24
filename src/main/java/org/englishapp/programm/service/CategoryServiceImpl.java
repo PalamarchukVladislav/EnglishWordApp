@@ -1,13 +1,10 @@
 package org.englishapp.programm.service;
 
 import org.englishapp.programm.model.entity.Category;
-import org.englishapp.programm.model.entity.request.CategoryRequest;
-import org.englishapp.programm.model.entity.response.CategoryResponse;
 import org.englishapp.programm.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,70 +20,35 @@ public class CategoryServiceImpl implements CategoryService {
 
 
     @Override
-    public List<CategoryResponse> findAll(CategoryRequest categoryRequest) {
+    public List<Category> findAll() {
 
-        CategoryResponse categoryResponse;
-
-        List<Category> categories = categoryRepository.findAll();
-        List<CategoryResponse> categoryResponses = new LinkedList<>();
-
-        if (categories != null){
-
-            for (int i = 0; i < categories.size(); i++) {
-                categoryResponse = categoryToCategoryResponse(categories.get(i));
-                categoryResponses.add(i,categoryResponse);
-            }
-
-        } else {
-            throw new RuntimeException("We not have ony words" );
-        }
-
-        return categoryResponses;
+        return categoryRepository.findAll();
     }
 
     @Override
-    public CategoryResponse findById(long categoriesId) {
-        Optional<Category> categoryOptional = categoryRepository.findById(categoriesId);
+    public Category findById(long categoriesId) {
+        Optional<Category> result = categoryRepository.findById(categoriesId);
 
         Category category;
 
-        if (categoryOptional.isPresent()){
-            category = categoryOptional.get();
+        if (result.isPresent()){
+            category = result.get();
         }else {
             throw new RuntimeException("Did not find category id - " + categoriesId );
         }
 
-        return categoryToCategoryResponse(category);
+        return category;
     }
 
     @Override
-    public CategoryResponse save(CategoryRequest categoryRequest) {
-
-        Category category = createCategoryFromCategoryRequest(categoryRequest);
-//        WordResponse wordResponse = wordService.findById(categoryRequest.getId());
-////        wordResponse.addCategory(category);
+    public void save(Category category) {
         categoryRepository.save(category);
 
-        return categoryToCategoryResponse(category);
     }
 
     @Override
     public void deleteById(long categoriesId) {
         categoryRepository.deleteById(categoriesId);
-    }
-
-
-    private Category createCategoryFromCategoryRequest(CategoryRequest categoryRequest){
-        Category category = new Category();
-        category.setCategoryName(categoryRequest.getCategoryName());
-        return category;
-    }
-
-    private CategoryResponse categoryToCategoryResponse(Category category){
-        CategoryResponse categoryResponse = new CategoryResponse();
-        categoryResponse.setCategoryName(category.getCategoryName());
-
-        return categoryResponse;
     }
 
 }

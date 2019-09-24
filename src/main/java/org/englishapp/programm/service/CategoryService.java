@@ -1,17 +1,16 @@
 package org.englishapp.programm.service;
 
-import org.englishapp.programm.model.entity.request.CategoryRequest;
-import org.englishapp.programm.model.entity.response.CategoryResponse;
+import org.englishapp.programm.model.entity.Category;
 
 import java.util.List;
 
 public interface CategoryService {
 
-    List<CategoryResponse> findAll(CategoryRequest categoryRequest);
+    List<Category> findAll();
 
-    CategoryResponse findById(long theId);
+    Category findById(long theId);
 
-    CategoryResponse save(CategoryRequest categoryRequest);
+    void save(Category category);
 
     void deleteById(long theId);
 
