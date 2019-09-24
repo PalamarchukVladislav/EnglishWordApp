@@ -28,36 +28,25 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
-    public List<CategoryResponse> findAll() {
+    public List<Category> getCategoriesForPlay() {
         List<Category> categories = categoryRepository.findAll();
-        List<CategoryResponse> categoryResponses = new ArrayList<>();
 
-        for (int i = 0; i < categories.size(); i++) {
-            categoryResponses.add(i, fromCategoryToCategoryResponse(categories.get(i)));
-        }
-
-        return categoryResponses;
+        return categories;
 
     }
 
     @Override
-    public CategoryResponse findById(long categoryId) {
+    public Category findCategoriesForPlayById(long categoryId) {
 
         List<Category> categories = categoryRepository.findAll();
-        List<CategoryResponse> categoryResponses = new ArrayList<>();
 
-        for (int i = 0; i < categories.size(); i++) { // вибираємо категорію з нульового айді*
-            categoryResponses.add(i, fromCategoryToCategoryResponse(categories.get(i)));
-        }
-
-
-        return categoryResponses.get((int) categoryId);
+        return categories.get((int) categoryId);
     }
 
-    private CategoryResponse fromCategoryToCategoryResponse(Category category){
-        CategoryResponse categoryResponse = new CategoryResponse();
-        categoryResponse.setCategoryName(category.getCategoryName());
-
-        return categoryResponse;
-    }
+//    private CategoryResponse fromCategoryToCategoryResponse(Category category){
+//        CategoryResponse categoryResponse = new CategoryResponse();
+//        categoryResponse.setCategoryName(category.getCategoryName());
+//
+//        return categoryResponse;
+//    }
 }

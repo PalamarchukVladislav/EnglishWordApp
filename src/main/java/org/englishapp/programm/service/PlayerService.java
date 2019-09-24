@@ -1,13 +1,13 @@
 package org.englishapp.programm.service;
 
-import org.englishapp.programm.model.entity.response.CategoryResponse;
+import org.englishapp.programm.model.entity.Category;
 
 import java.util.List;
 
 public interface PlayerService {
 
-    List<CategoryResponse> findAll();
+    List<Category> getCategoriesForPlay();
 
-    CategoryResponse findById(long theId);
+    Category findCategoriesForPlayById(long theId);
 
 }
