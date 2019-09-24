@@ -9,11 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name="category")
-@Getter
-@Setter
-@ToString
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class Category {
 	
 	@Id

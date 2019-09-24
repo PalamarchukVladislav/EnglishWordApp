@@ -7,11 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="words")
-@Getter
-@Setter
-@ToString
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class Word {
 
 	@Id

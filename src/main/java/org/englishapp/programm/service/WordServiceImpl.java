@@ -1,6 +1,5 @@
 package org.englishapp.programm.service;
 
-import org.englishapp.programm.model.entity.Category;
 import org.englishapp.programm.model.entity.Word;
 import org.englishapp.programm.repository.WordRepository;
 import org.springframework.stereotype.Service;
