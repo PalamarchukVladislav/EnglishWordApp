@@ -1,6 +1,7 @@
 package org.englishapp.programm.controller;
 
 import org.englishapp.programm.model.entity.Category;
+import org.englishapp.programm.model.entity.response.CategoryResponse;
 import org.englishapp.programm.service.CategoryService;
 import org.englishapp.programm.service.PlayerService;
 import org.englishapp.programm.service.WordService;
@@ -26,32 +27,20 @@ public class PlayerController {
     }
 
     @GetMapping("/showAllCategories")
-    public ResponseEntity<List<Category>> findAll(){
+    public List<CategoryResponse> findAll(){
 
-        List<Category> categories = categoryService.findAll();
-
-        if (categories.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        else {
-            List<Category> categoriesAfterCheck = new ArrayList<>(categories);
-
-            return new ResponseEntity<>(categoriesAfterCheck, HttpStatus.FOUND);
-        }
+        return playerService.findAll();
     }
 
     @GetMapping("/showAllCategories/{categoriesId}")
-    public ResponseEntity<Category> getCategory(@PathVariable long categoriesId){
+    public CategoryResponse getCategory(@PathVariable long categoriesId){
 
-        Category category = categoryService.findById(categoriesId);
+//        Category category = categoryService.findById(categoriesId);
+//
+//        if (category == null){
+//            throw new RuntimeException("Category id not found - " + categoriesId);
+//        }
 
-        if (category == null){
-            throw new RuntimeException("Category id not found - " + categoriesId);
-        }
-
-        return new ResponseEntity<>(category, HttpStatus.FOUND);
+        return playerService.findById(categoriesId);
     }
-
-
-
 }
