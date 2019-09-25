@@ -47,6 +47,7 @@ public class PlayerServiceImpl implements PlayerService {
     @Override
     public Word findRandomWordForPlayByCategoryId(long categoryId) {
 
+
         return wordRepository.getOne(findRandomIdForWord(categoryId));
     }
 
@@ -60,7 +61,7 @@ public class PlayerServiceImpl implements PlayerService {
 
         Random random = new Random();
 
-        return minValueForRandom + random.nextInt((int) (maxValueForRandom - minValueForRandom + 1));
+        return minValueForRandom + random.nextInt((int) maxValueForRandom);
     }
 
 }
