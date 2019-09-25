@@ -25,12 +25,12 @@ public class Category {
 	private List<Word> words = new ArrayList<>();
 
 
-	public void addWord(final Word word){
-
-		words.add(word);
-
-		word.setCategory(this);
-	}
+//	public void addWord(final Word word){
+//
+//		words.add(word);
+//
+//		word.setCategory(this);
+//	}
 
 }
 

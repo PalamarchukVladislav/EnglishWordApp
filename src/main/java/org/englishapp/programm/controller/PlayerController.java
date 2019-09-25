@@ -1,7 +1,7 @@
 package org.englishapp.programm.controller;
 
 import org.englishapp.programm.model.entity.Category;
-import org.englishapp.programm.model.entity.response.CategoryResponse;
+import org.englishapp.programm.model.entity.Word;
 import org.englishapp.programm.service.CategoryService;
 import org.englishapp.programm.service.PlayerService;
 import org.englishapp.programm.service.WordService;
@@ -26,12 +26,18 @@ public class PlayerController {
     @GetMapping("/showAllCategories")
     public List<Category> findAllCategoriesForPlay(){
 
-        return playerService.getCategoriesForPlay();
+        return playerService.findCategoriesForPlay();
     }
 
     @GetMapping("/showAllCategories/{categoriesId}")
     public Category findCategoryForPlay(@PathVariable long categoriesId){
 
         return playerService.findCategoriesForPlayById(categoriesId);
+    }
+
+    @GetMapping("/randomWordFormCategory/{categoriesId}")
+    public Word getRandomWordForPlayByCategoryId(@PathVariable long categoriesId){
+
+        return playerService.findRandomWordForPlayByCategoryId(categoriesId);
     }
 }

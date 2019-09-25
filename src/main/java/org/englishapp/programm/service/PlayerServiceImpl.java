@@ -1,15 +1,18 @@
 package org.englishapp.programm.service;
 
 import org.englishapp.programm.model.entity.Category;
+import org.englishapp.programm.model.entity.Word;
 import org.englishapp.programm.model.entity.response.CategoryResponse;
 import org.englishapp.programm.repository.CategoryRepository;
 import org.englishapp.programm.repository.PlayerRepository;
 import org.englishapp.programm.repository.WordRepository;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.ManyToOne;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 
 @Service
@@ -28,10 +31,8 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
-    public List<Category> getCategoriesForPlay() {
-        List<Category> categories = categoryRepository.findAll();
-
-        return categories;
+    public List<Category> findCategoriesForPlay() {
+        return categoryRepository.findAll();
 
     }
 
@@ -43,10 +44,23 @@ public class PlayerServiceImpl implements PlayerService {
         return categories.get((int) categoryId);
     }
 
-//    private CategoryResponse fromCategoryToCategoryResponse(Category category){
-//        CategoryResponse categoryResponse = new CategoryResponse();
-//        categoryResponse.setCategoryName(category.getCategoryName());
-//
-//        return categoryResponse;
-//    }
+    @Override
+    public Word findRandomWordForPlayByCategoryId(long categoryId) {
+
+        return wordRepository.getOne(findRandomIdForWord(categoryId));
+    }
+
+    private long findRandomIdForWord(long categoryId){
+
+        Category category = categoryRepository.getOne(categoryId);
+
+        List<Word> words = category.getWords();
+        long minValueForRandom = words.get(0).getId();
+        long maxValueForRandom = words.size();
+
+        Random random = new Random();
+
+        return minValueForRandom + random.nextInt((int) (maxValueForRandom - minValueForRandom + 1));
+    }
+
 }
