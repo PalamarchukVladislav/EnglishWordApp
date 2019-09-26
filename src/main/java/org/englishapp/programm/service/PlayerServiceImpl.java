@@ -8,10 +8,7 @@ import org.englishapp.programm.repository.PlayerRepository;
 import org.englishapp.programm.repository.WordRepository;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.ManyToOne;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.Random;
 
 
@@ -30,6 +27,12 @@ public class PlayerServiceImpl implements PlayerService {
         this.wordService = wordService;
     }
 
+    private List<Word> GameList(long categoriesId){
+        Category category = categoryRepository.getOne(categoriesId);
+
+        return category.getWords();
+    }
+
     @Override
     public List<Category> findCategoriesForPlay() {
         return categoryRepository.findAll();
@@ -38,7 +41,6 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public Category findCategoriesForPlayById(long categoryId) {
-
         List<Category> categories = categoryRepository.findAll();
 
         return categories.get((int) categoryId);
@@ -46,8 +48,6 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public Word findRandomWordForPlayByCategoryId(long categoryId) {
-
-
         return wordRepository.getOne(findRandomIdForWord(categoryId));
     }
 
@@ -60,6 +60,7 @@ public class PlayerServiceImpl implements PlayerService {
 
         if (truWord.getUkrTranslate().equals(wordAnswer.getUkrAnswerTranslate())){
             answer = true;
+            GameList(truWord.getCategory().getId()).remove(truWord);
         }else if (!truWord.getUkrTranslate().equals(wordAnswer.getUkrAnswerTranslate())){
             answer = false;
         }
@@ -67,17 +68,15 @@ public class PlayerServiceImpl implements PlayerService {
         return answer;
     }
 
+
     private long findRandomIdForWord(long categoryId){
-
-        Category category = categoryRepository.getOne(categoryId);
-
-        List<Word> words = category.getWords();
-        long minValueForRandom = words.get(0).getId();
-        long maxValueForRandom = words.size();
+        long minValueForRandom = GameList(categoryId).get(0).getId();
+        long maxValueForRandom = GameList(categoryId).size();
 
         Random random = new Random();
 
         return minValueForRandom + random.nextInt((int) maxValueForRandom);
     }
+
 
 }
