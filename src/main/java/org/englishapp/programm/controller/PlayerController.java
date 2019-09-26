@@ -2,6 +2,7 @@ package org.englishapp.programm.controller;
 
 import org.englishapp.programm.model.entity.Category;
 import org.englishapp.programm.model.entity.Word;
+import org.englishapp.programm.model.entity.WordAnswer;
 import org.englishapp.programm.service.CategoryService;
 import org.englishapp.programm.service.PlayerService;
 import org.englishapp.programm.service.WordService;
@@ -39,5 +40,11 @@ public class PlayerController {
     public Word getRandomWordForPlayByCategoryId(@PathVariable long categoriesId){
 
         return playerService.findRandomWordForPlayByCategoryId(categoriesId);
+    }
+
+    @PostMapping("/answer")
+    public boolean sendAnswer(@RequestBody WordAnswer wordAnswer){
+
+        return playerService.getAnswer(wordAnswer);
     }
 }

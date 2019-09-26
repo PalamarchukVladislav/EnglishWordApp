@@ -2,7 +2,7 @@ package org.englishapp.programm.service;
 
 import org.englishapp.programm.model.entity.Category;
 import org.englishapp.programm.model.entity.Word;
-import org.englishapp.programm.model.entity.response.CategoryResponse;
+import org.englishapp.programm.model.entity.WordAnswer;
 import org.englishapp.programm.repository.CategoryRepository;
 import org.englishapp.programm.repository.PlayerRepository;
 import org.englishapp.programm.repository.WordRepository;
@@ -49,6 +49,22 @@ public class PlayerServiceImpl implements PlayerService {
 
 
         return wordRepository.getOne(findRandomIdForWord(categoryId));
+    }
+
+    @Override
+    public boolean getAnswer(WordAnswer wordAnswer) {
+
+        boolean answer = false;
+
+        Word truWord = wordRepository.getOne(wordAnswer.getWordId());
+
+        if (truWord.getUkrTranslate().equals(wordAnswer.getUkrAnswerTranslate())){
+            answer = true;
+        }else if (!truWord.getUkrTranslate().equals(wordAnswer.getUkrAnswerTranslate())){
+            answer = false;
+        }
+
+        return answer;
     }
 
     private long findRandomIdForWord(long categoryId){
