@@ -1,5 +1,7 @@
 package org.englishapp.programm.service;
 
+import java.util.ArrayList;
+import lombok.RequiredArgsConstructor;
 import org.englishapp.programm.model.entity.Category;
 import org.englishapp.programm.model.entity.Word;
 import org.englishapp.programm.model.entity.WordAnswer;
@@ -13,19 +15,15 @@ import java.util.Random;
 
 
 @Service
+@RequiredArgsConstructor
 public class PlayerServiceImpl implements PlayerService {
 
     private PlayerRepository playerRepository;
     private WordRepository wordRepository;
     private CategoryRepository categoryRepository;
-
     private WordService wordService;
-    PlayerServiceImpl(PlayerRepository playerRepository, WordRepository wordRepository,WordService wordService, CategoryRepository categoryRepository){
-        this.playerRepository = playerRepository;
-        this.wordRepository = wordRepository;
-        this.categoryRepository = categoryRepository;
-        this.wordService = wordService;
-    }
+
+    private List<Word> playList = new ArrayList<>();
 
     private List<Word> GameList(long categoriesId){
         Category category = categoryRepository.getOne(categoriesId);
@@ -54,18 +52,14 @@ public class PlayerServiceImpl implements PlayerService {
     @Override
     public boolean getAnswer(WordAnswer wordAnswer) {
 
-        boolean answer = false;
+        Word originalWord = wordRepository.getOne(wordAnswer.getWordId());
 
-        Word truWord = wordRepository.getOne(wordAnswer.getWordId());
-
-        if (truWord.getUkrTranslate().equals(wordAnswer.getUkrAnswerTranslate())){
-            answer = true;
-            GameList(truWord.getCategory().getId()).remove(truWord);
-        }else if (!truWord.getUkrTranslate().equals(wordAnswer.getUkrAnswerTranslate())){
-            answer = false;
+        if (originalWord.getUkrTranslate().equals(wordAnswer.getUkrAnswerTranslate())) {
+            playList.remove(originalWord);
+            return true;
+        } else {
+            return false;
         }
-
-        return answer;
     }
 
 
