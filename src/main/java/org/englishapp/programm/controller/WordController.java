@@ -1,5 +1,6 @@
 package org.englishapp.programm.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.englishapp.programm.model.entity.Word;
 import org.englishapp.programm.service.WordService;
 import org.springframework.http.HttpStatus;
@@ -9,16 +10,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/word")
 public class WordController {
 
-    private WordService wordService;
-
-    WordController(WordService wordService){
-        this.wordService = wordService;
-    } // Dependency injection
+    private final WordService wordService;
 
     @GetMapping("/list")
     public ResponseEntity<List<Word>> findAll(){

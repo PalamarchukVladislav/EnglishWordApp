@@ -18,15 +18,17 @@ import java.util.Random;
 @RequiredArgsConstructor
 public class PlayerServiceImpl implements PlayerService {
 
-    private PlayerRepository playerRepository;
-    private WordRepository wordRepository;
-    private CategoryRepository categoryRepository;
-    private WordService wordService;
+    private final PlayerRepository playerRepository;
+    private final WordRepository wordRepository;
+    private final CategoryRepository categoryRepository;
+    private final WordService wordService;
 
     private List<Word> playList = new ArrayList<>();
 
     private List<Word> GameList(long categoriesId){
         Category category = categoryRepository.getOne(categoriesId);
+
+        playList.addAll(category.getWords());
 
         return category.getWords();
     }
@@ -34,7 +36,6 @@ public class PlayerServiceImpl implements PlayerService {
     @Override
     public List<Category> findCategoriesForPlay() {
         return categoryRepository.findAll();
-
     }
 
     @Override

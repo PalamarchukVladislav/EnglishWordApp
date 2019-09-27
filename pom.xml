@@ -8,8 +8,8 @@
 		<version>2.1.8.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.luv2code.springboot</groupId>
-	<artifactId>cruddemo</artifactId>
+	<groupId>com.englishapp.programm</groupId>
+	<artifactId>englishApp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>EnglishApp</name>
 
@@ -27,6 +27,7 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
+			<version>1.4.199</version>
 			<scope>runtime</scope>
 		</dependency>
 
